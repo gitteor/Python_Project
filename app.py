@@ -4,7 +4,7 @@ from pymysql.connections import DEBUG
 
 # 차후 해야할 부분 : 입력 조건 및 Alert, Pagination, 데이터통계 안된 부분, 검색 다양화, 소셜로그인, 쓰기 삭제 제한 만들기, CNN
 
-db = pymysql.connect(host="database-project.c7coyxstoq3r.ap-northeast-2.rds.amazonaws.com", user="aib03sji", password="aib03sji", db="project", charset="utf8")
+db = pymysql.connect(host="database-project.c7coyxstoq3r.ap-northeast-2.rds.amazonaws.com", user="aib03sji", password="####숨김####", db="project", charset="utf8")
 curs = db.cursor()
 
 app = Flask(__name__)
