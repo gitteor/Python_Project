@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>운전매너 조회, 카인드</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet">
+  </head>
+
+  <body style="padding-top: 3.5rem; overflow-y: scroll;">
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="http://13.125.147.232:5000" style="font-weight: 600;">Caind</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="http://13.125.147.232:5000">Home <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://13.125.147.232:5000/list">등록차량</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://13.125.147.232:5000/add">매너등록</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="">번호판 인식</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">데이터 통계</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="">모델별</a>
+              <a class="dropdown-item" href="http://13.125.147.232:5000/data2">외형별</a>
+              <a class="dropdown-item" href="">제조사별</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" method="GET" action="/search">
+          <input name="searchword" type="text" class="form-control mr-sm-2" placeholder="차량번호 검색" aria-label="차량번호 검색" style="width: 350px;">
+          <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" href="http://13.125.147.232:5000/search">Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <main role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron" style="margin-bottom: 2rem; padding: 4rem 2rem;
+      background-image: url(https://ifh.cc/g/q1IlvQ.jpg); height: 100%; width: 100%; border-radius: 0;">                             
+        <div class="container">
+          <h1 class="display-3" style="color: white; font-weight: 500; text-shadow: 2px 2px 3px gray; font-size: 30pt;"></h1>
+          <p style="color: white; font-size: 15pt; text-shadow: 2px 2px 1px black;"></p>
+          <p></p>
+        </div>
+      </div>
+
+      <div class="container">
+
+        <h3 class="mb-3">외형별 통계</h3>
+        <meta id="my-data1" data-name="{{count1}}">
+        <div>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+            // Load Charts and the corechart and barchart packages.
+            google.charts.load('current', {'packages':['corechart']});
+
+            // Draw the pie chart and bar chart when Charts is loaded.
+            google.charts.setOnLoadCallback(drawChart);
+            
+            var num2 = $('#my-data1').data();
+            function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Topping');
+                data.addColumn('number', 'Slices');
+                data.addRows([
+                ['경차', 3],
+                ['승용', 4],
+                ['SUV', 2],
+                ['기타', num2]
+
+                ]);
+
+                var piechart_options = {title:'Excellent & Good Manner',
+                            width:500,
+                            height:300};
+                var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
+                piechart.draw(data, piechart_options);
+
+                var barchart_options = {title:'Barchart',
+                            width:500,
+                            height:300,
+                            legend: 'none'};
+                var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
+                barchart.draw(data, barchart_options);
+            }
+            </script>
+        </div>
+        <body>
+            <!--Table and divs that hold the pie charts-->
+            <table class="columns">
+            <tr>
+                <td><div id="piechart_div" style="border: 1px solid #ccc"></div></td>
+                <td><div id="barchart_div" style="margin-left: 30px; border: 1px solid #ccc"></div></td>
+            </tr>
+            </table>
+        </body>
+        </div>
+
+
+    </main>
+
+    <footer class="container">
+      <p></p>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
